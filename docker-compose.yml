@@ -9,7 +9,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password 
       MYSQL_DATABASE: django 
-      MYSQL_USER: django-user 
+      MYSQL_USER: django_user 
       MYSQL_PASSWORD: password 
   web:
     build: .
