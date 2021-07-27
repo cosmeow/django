@@ -2,6 +2,7 @@ version: "3.9"
    
 services:
   db:
+    container_name: db
     image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
@@ -11,14 +12,20 @@ services:
       MYSQL_DATABASE: django 
       MYSQL_USER: django_user 
       MYSQL_PASSWORD: password 
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
   web:
     build: .
+    container_name: django
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 volumes:
   db_data: {}
