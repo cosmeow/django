@@ -10,8 +10,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password 
       MYSQL_DATABASE: django 
-      MYSQL_USER: django_user 
-      MYSQL_PASSWORD: password 
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
